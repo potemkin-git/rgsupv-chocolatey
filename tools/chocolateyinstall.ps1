@@ -30,11 +30,11 @@ if ([string]::IsNullOrEmpty($pp['Token'])) {
 } else {
   Write-Output "Starting agent install using deployment token: $($pp['Token'])"
 
-  if ($pp['Staging'] -eq "1") {
-    Write-Output "Deploying (Staging) on node #$($pp['Node'])"
-    & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])" --expected-host-name lisa.staging.rg.gg
+  if ($pp['ExpectedHostName']) {
+    Write-Output "Deploying (custom hostname) on node #$($pp['Node'])"
+    & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])" --expected-host-name "$($pp['ExpectedHostName'])"
   } else {
-    Write-Output "Deploying (Production) on node #$($pp['Node'])"
+    Write-Output "Deploying on node #$($pp['Node'])"
     & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])"
   }
 }

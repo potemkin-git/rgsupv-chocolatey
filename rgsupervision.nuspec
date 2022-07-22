@@ -34,7 +34,8 @@
       ## Package parameters
       The following package parameters must be set:
       * `/Token:` (string) User deployment token used for authentication while registering agent (required)
-      * `/Node:`  (integer) Node ID where agent will be located within dashboard (default is user root node)
+      * `/Node:`  (integer) Node ID where agent will be located within dashboard (optional, default to user's root node)
+      * `/ExpectedHostName:`  (string) Only for advanced users: Custom host name used for registration (optional, bad usage may prevent proper installation)
 
       To pass parameters, use `--params "''"` within install command.
       Example: `choco install rgsupervision [other options] --params "'/Token:mytokenvalue /Node:12345'"`
