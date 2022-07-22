@@ -16,7 +16,6 @@ if (!$pp['Token']) { $pp['Token'] = Read-Host 'Please enter your deployment toke
 if (!$pp['Node']) { $pp['Node'] = Read-Host 'Please enter the node ID where agent should be deployed (default: root):' }
 
 if (!$pp['Node']) { $pp['Node'] = 'root' }
-
 # This will ensure Chocolatey assumes package is installed, so it can be uninstalled properly
 # Install-ChocolateyZipPackage does not actually install agent, it only downloads Zip file and puts its content within Tools folder
 Install-ChocolateyZipPackage -PackageName $packageName -Url $url -Url64bit $url64 -UnzipLocation $toolsDir -Checksum $checkSum -ChecksumType $checkSumType -Checksum64 $checkSum -ChecksumType64 $checkSumType
@@ -30,6 +29,12 @@ if ([string]::IsNullOrEmpty($pp['Token'])) {
   Write-Output "$($exeFilePath) --action register --login token@token.tk --password <YourToken> --node #$($pp['Node'])"
 } else {
   Write-Output "Starting agent install using deployment token: $($pp['Token'])"
-  Write-Output "Deploying on node #$($pp['Node'])" 
-  & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])" --expected-host-name lisa.staging.rg.gg
+
+  if ($pp['Staging'] -eq "1") {
+    Write-Output "Deploying (Staging) on node #$($pp['Node'])"
+    & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])" --expected-host-name lisa.staging.rg.gg
+  } else {
+    Write-Output "Deploying (Production) on node #$($pp['Node'])"
+    & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])"
+  }
 }
