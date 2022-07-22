@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>rgsupervision</id>
+    <version>1.0</version>
+    <packageSourceUrl>https://github.com/rgsystemes/rgsupv-chocolatey</packageSourceUrl>
+    <projectUrl>https://www.rgsystem.fr</projectUrl>
+    <iconUrl>https://www.rgsystem.fr/wp-content/uploads/2021/12/RGsystem-logo-horizontal-crop.svg</iconUrl>
+    <owners>RG System</owners>
+    <title>RG Supervision Installer</title>
+    <authors>RG SYSTEM</authors>
+    <docsUrl>https://help.rgsystem.com/hc/en-us/articles/360003601680-Quick-start</docsUrl>
+    <tags>rgsystem agent monitoring backup security remote desktop</tags>
+    <summary>RG Supervision agent installer</summary>
+    <description>
+      # RG Supervision agent installer
+
+      This software made by RG System deploys a supervision agent which includes features for:
+      - Remote Monitoring and Management
+      - Remote desktop access (Assist)
+      - Backup (Files & Data and Microsoft 365)
+      - Security (BitDefender integration)
+      - ...and many other (automation, scripting, reports)
+
+      ## Requirements
+      All agent features and monitored data will be available within the RG System dashboard (or through authenticated API).
+
+      A user account will be required prior deploying, in order to authenticate with your **deployment token**.
+      This token can be generated from the user profile page within dashboard (parameters tab).
+
+      Don't have any account ? Visit https://www.rgsystem.com for more information.
+
+      ## Package parameters
+      The following package parameters must be set:
+      * `/Token:` (string) User deployment token used for authentication while registering agent (required)
+      * `/Node:`  (integer) Node ID where agent will be located within dashboard (default is user root node)
+
+      To pass parameters, use `--params "''"` within install command.
+      Example: `choco install rgsupervision [other options] --params "'/Token:mytokenvalue /Node:12345'"`
+
+      ## Package update
+      This installer deploys the latest RG Supervision release for Windows operating systems.
+      Following updates will be automatically handled by agent self update feature. Hence, no Chocolatey update action is required.
+	  </description>
+    <releaseNotes>https://help.rgsystem.com/hc/en-us/sections/360004073880-RELEASE-NOTES</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
