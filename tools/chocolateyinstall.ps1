@@ -8,7 +8,7 @@ $fileLocation = Join-Path $toolsDir $binaryName
 $checkSum     = '3905f2176c8c6eb7b2866d0efd6af60a' # md5
 
 # Fallback when no Token provided (still deploys binary for further manual installation
-$url           = 'https://github.com/rgsystemes/rgsupv-chocolatey/raw/main/tools/rgsupv-win.zip'
+$url           = 'https://github.com/rgsystemes/rgsupv-chocolatey/raw/main/rgsupv-win.zip'
 $url64         = $url
 $zipCheckSum   = '7eb82f3f4adaadd126e3f46b56f4fb0f' # md5
 $unzipLocation = Join-Path $toolsDir 'zip'
