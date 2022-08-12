@@ -1,40 +1,57 @@
 $packageName = 'rgsupervision'
-$toolsDir    = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)"
-$exeFilePath = Join-Path $toolsDir 'RG-Setup.exe'
+$binaryName  = "RG-Setup.exe"
+$checkSumType = "md5"
 
-$url = 'https://dashboard.rg-supervision.com/download/rgsupv-win.zip'
-$url64 = 'https://dashboard.rg-supervision.com/download/rgsupv-win.zip'
-$md5CheckSumUrl = 'https://dashboard.rg-supervision.com/download/rgsupv-win.zip.md5'
-$Response = Invoke-WebRequest -URI $md5CheckSumUrl
-$ResponseArray = $Response.toString().Trim().Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
-$checkSum = $ResponseArray[0]
-$checkSumType = 'md5'
+# Regular binary install
+$toolsDir     = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)"
+$fileLocation = Join-Path $toolsDir $binaryName
+$checkSum     = '3905f2176c8c6eb7b2866d0efd6af60a' # md5
+
+# Fallback when no Token provided (still deploys binary for further manual installation
+$url           = 'https://github.com/rgsystemes/rgsupv-chocolatey/raw/main/tools/rgsupv-win.zip'
+$url64         = $url
+$zipCheckSum   = '7eb82f3f4adaadd126e3f46b56f4fb0f' # md5
+$unzipLocation = Join-Path $toolsDir 'zip'
+
+##### Requesting required params in not passed as choco install arguments. Expecting: choco install rgsupervision -y --params "'/TOKEN:value /NODE:value'"
 
 $pp = Get-PackageParameters
-# Requesting required params in not passed as choco install arguments. Expecting: choco install rgsupervision -y --params "'/TOKEN:value /NODE:value'"
+
 if (!$pp['Token']) { $pp['Token'] = Read-Host 'Please enter your deployment token:' }
 if (!$pp['Node']) { $pp['Node'] = Read-Host 'Please enter the node ID where agent should be deployed (default: root):' }
-
 if (!$pp['Node']) { $pp['Node'] = 'root' }
-# This will ensure Chocolatey assumes package is installed, so it can be uninstalled properly
-# Install-ChocolateyZipPackage does not actually install agent, it only downloads Zip file and puts its content within Tools folder
-Install-ChocolateyZipPackage -PackageName $packageName -Url $url -Url64bit $url64 -UnzipLocation $toolsDir -Checksum $checkSum -ChecksumType $checkSumType -Checksum64 $checkSum -ChecksumType64 $checkSumType
+
+##### Attempting either binary install or (if no Token provided) simple zip extract
 
 if ([string]::IsNullOrEmpty($pp['Token'])) {
-  Write-Output "RG Supervision agent installation cannot be processed without <Token> mandatory parameter."
-  Write-Output "You should have used the following command:"
-  Write-Output "choco install rgsupervision --params "'/Token:value(string) /Node:value(int)'""
-  Write-Output "If you do not have your deployment token yet, check your Deployment section within your user profile management page."
+  Write-Error "RG Supervision agent installation cannot be processed without <Token> mandatory parameter."
+  Write-Error "You should have used the following command:"
+  Write-Error "choco install rgsupervision --params `"'/Token:value(string) /Node:value(int)'`""
+  Write-Error "If you do not have your deployment token yet, check your Deployment section within your user profile management page."
   Write-Output "You will then be able to finish the installation by running the following command:"
-  Write-Output "$($exeFilePath) --action register --login token@token.tk --password <YourToken> --node #$($pp['Node'])"
+  Write-Output "$(Join-Path $unzipLocation $binaryName) --action register --login token@token.tk --password <YourToken> --node #$($pp['Node'])"
+
+  Install-ChocolateyZipPackage -PackageName $packageName -Url $url -Url64bit $url64 -UnzipLocation $unzipLocation -Checksum $zipCheckSum -ChecksumType $checkSumType -Checksum64 $zipCheckSum -ChecksumType64 $checkSumType
 } else {
   Write-Output "Starting agent install using deployment token: $($pp['Token'])"
+  Write-Output $(if ($pp['ExpectedHostName']) {"Deploying (custom hostname) on node #$($pp['Node'])"} else {"Deploying on node #$($pp['Node'])"})
 
-  if ($pp['ExpectedHostName']) {
-    Write-Output "Deploying (custom hostname) on node #$($pp['Node'])"
-    & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])" --expected-host-name "$($pp['ExpectedHostName'])"
-  } else {
-    Write-Output "Deploying on node #$($pp['Node'])"
-    & $exeFilePath --action register --login "token@token.tk" --password "$($pp['Token'])" --node "#$($pp['Node'])"
+  $silentArgs = "--action register --login token@token.tk --password $($pp['Token']) --node #$($pp['Node'])"
+  if ($pp['ExpectedHostName']) { $silentArgs += " --expected-host-name $($pp['ExpectedHostName'])" } # ExpectedHostName parameter mainly used for internal debug or on premise requirements
+
+  $packageArgs = @{
+    packageName    = $packageName
+    fileType       = 'exe'
+    file           = $fileLocation
+    file64         = $fileLocation
+    checksum       = $checkSum
+    checksum64     = $checkSum
+    checksumType   = $checkSumType
+    silentArgs     = $silentArgs
+    validExitCodes = @(0, 3010, 1641)
+    softwareName   = 'rgsupervision*'
   }
+
+  Install-ChocolateyInstallPackage @packageArgs
 }
+

@@ -1,5 +1,11 @@
-Uninstall-ChocolateyZipPackage 'rgsupervision' 'rgsupv-win.zip'
-
 If (Test-Path -Path "C:\Program Files (x86)\RG-Supervision\RG_Supervision.exe") {
-	& "C:\Program Files (x86)\RG-Supervision\RG_Supervision.exe" --action uninstall-console
+	$packageArgs = @{
+		packageName    = 'rgsupervision'
+		fileType       = 'exe'
+		file           = "C:\Program Files (x86)\RG-Supervision\RG_Supervision.exe"
+		silentArgs     = '--action uninstall-console'
+		validExitCodes = @(0, 3010, 1641)
+	}
+
+	Uninstall-ChocolateyPackage @packageArgs
 }
