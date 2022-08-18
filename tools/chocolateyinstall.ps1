@@ -35,7 +35,6 @@ if ([string]::IsNullOrEmpty($pp["Token"])) {
     checksum64     = $checkSum
     checksumType   = $checkSumType
     silentArgs     = $silentArgs
-    validExitCodes = @(0, 3010, 1641)
     softwareName   = "rgsupervision*"
   }
 
