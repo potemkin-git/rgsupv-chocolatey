@@ -3,7 +3,7 @@ $binaryName   = "RG-Setup.exe"
 $checkSumType = "md5"
 $toolsDir     = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)"
 $fileLocation = Join-Path $toolsDir $binaryName # 2.3.5062.0
-$checkSum     = "3905f2176c8c6eb7b2866d0efd6af60a" # md5 matching 2.3.5062.0 binary (requires update along with any binary update)
+$checkSum     = "3905f2176c8c6eb7b2866d0efd6af60a" # md5 matching 2.3.5062.0 binary. Any binary update requires md5 and README.md updates.
 
 ##### Requesting required params in not passed as choco install arguments. Expecting: choco install rgsupervision -y --params "'/TOKEN:value /NODE:value'"
 $pp = Get-PackageParameters
