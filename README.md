@@ -27,3 +27,7 @@ Example: `choco install rgsupervision [other options] --params "'/Token:mytokenv
 ## Package update
 This installer deploys the latest RG Supervision release for Windows operating systems. 
 Following updates will be automatically handled by agent self update feature. Hence, no Chocolatey update action is required.
+
+## Current version
+Binary included in the current package corresponds to version 2.3.5062.0.  
+If a newer version has been released since, it will be automatically updated a few moments after installation.  
