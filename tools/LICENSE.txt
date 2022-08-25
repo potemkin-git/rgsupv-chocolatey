@@ -1,0 +1,4 @@
+﻿Copyright (c) 2022 RG System
+
+RG Systèmes SAS has a private ownership on the provided software.
+It does NOT include permissions for any Commercial use, Modification, Distribution, Patent use, Private use, Trademark use.

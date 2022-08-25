@@ -1,0 +1,11 @@
+﻿VERIFICATION
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+
+This package is owned, published and maintained by RG System© (legal name: "RG Systèmes SAS"©).
+More info can be found within the company website at https://www.rgsystem.fr
+Binary download can be reached through this page: https://www.rgsystem.fr/telecharger-agent, while choosing and extracting the .zip option.
+Note: online version corresponds to the latest release which may vary through time, while this package provides the 2.3.5062.0 version.
+Nonetheless, all binaries contain a self update feature that will ensure, upon installation and across time, that you always benefit from the latest release.
+
+Binary authenticity can be tested using this MD5 hash: "3905f2176c8c6eb7b2866d0efd6af60a" over the RG-Setup.exe file, and is digitally signed by "RG Systèmes SAS" company (June 7th, 2022).
