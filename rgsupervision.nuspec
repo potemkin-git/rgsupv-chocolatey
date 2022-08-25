@@ -8,8 +8,8 @@
     <projectUrl>https://www.rgsystem.fr</projectUrl>
     <iconUrl>https://www.rgsystem.fr/wp-content/uploads/2021/12/RGsystem-logo-horizontal-crop.svg</iconUrl>
     <owners>RG System</owners>
+    <authors>RG System</authors>
     <title>RG Supervision Installer</title>
-    <authors>RG SYSTEM</authors>
     <docsUrl>https://help.rgsystem.com/hc/en-us/articles/360003601680-Quick-start</docsUrl>
     <tags>rgsystem agent monitoring backup security remote desktop</tags>
     <summary>RG Supervision agent installer</summary>
