@@ -3,20 +3,20 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>rgsupervision</id>
-    <version>1.0</version>
+    <version>2.0</version>
     <packageSourceUrl>https://github.com/rgsystemes/rgsupv-chocolatey</packageSourceUrl>
     <projectUrl>https://www.rgsystem.fr</projectUrl>
     <iconUrl>https://www.rgsystem.fr/wp-content/uploads/2021/12/RGsystem-logo-horizontal-crop.svg</iconUrl>
-    <owners>RG System</owners>
-    <authors>RG System</authors>
-    <title>RG Supervision Installer</title>
+    <owners>Septeo IT Solutions©</owners>
+    <authors>RG System Suite by Septeo©</authors>
+    <title>RG System Suite by Septeo© - Supervision agent</title>
     <docsUrl>https://help.rgsystem.com/hc/en-us/articles/360003601680-Quick-start</docsUrl>
     <tags>rgsystem agent monitoring backup security remote desktop</tags>
     <summary>RG Supervision agent installer</summary>
     <description>
-      # RG Supervision agent installer
+      # RG System Suite by Septeo© - Supervision agent
 
-      This software made by RG System deploys a supervision agent which includes features for:
+      This software made by RG System Suite by Septeo© deploys a supervision agent which includes features for:
       - Remote Monitoring and Management
       - Remote desktop access (Assist)
       - Backup (Files and Data, Microsoft 365)
@@ -24,7 +24,7 @@
       - ...and many other (automation, scripting, reports)
 
       ## Requirements
-      All agent features and monitored data will be available within the RG System dashboard (or through authenticated API).
+      All agent features and monitored data will be available within the RG System Suite by Septeo© dashboard (or through authenticated API).
 
       A user account will be required prior deploying, in order to authenticate with your **deployment token**.
       This token can be generated from the user profile page within dashboard (parameters tab).
@@ -41,7 +41,7 @@
       Example: `choco install rgsupervision [other options] --params "'/Token:mytokenvalue /Node:12345'"`
 
       ## Package update
-      This installer deploys the latest RG Supervision release for Windows operating systems.
+      This installer deploys the version 2.4.108.0 of RG System Suite by Septeo© Supervision agent (for Windows operating systems). 
       Following updates will be automatically handled by agent self update feature. Hence, no Chocolatey update action is required.
 	  </description>
     <releaseNotes>https://help.rgsystem.com/hc/en-us/sections/360004073880-RELEASE-NOTES</releaseNotes>
