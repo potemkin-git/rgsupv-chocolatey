@@ -15,7 +15,7 @@ if (!$pp["Node"]) { $pp["Node"] = "root" }
 ##### Attempting either binary install or (if no Token provided) simple zip extract
 
 if ([string]::IsNullOrEmpty($pp["Token"])) {
-  Write-Error "RG System Suite by Septeo© Supervision agent installation cannot be processed without <Token> mandatory parameter."
+  Write-Error "Installation cannot be processed without <Token> mandatory parameter."
   Write-Error "You should have used the following command:"
   Write-Error "choco install rgsupervision --params `"'/Token:value(string) /Node:value(int)'`""
   Write-Error "If you do not have your deployment token yet, check your Deployment section within your user profile management page."

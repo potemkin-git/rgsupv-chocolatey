@@ -25,9 +25,9 @@ To pass parameters, use `--params "''"` within install command.
 Example: `choco install rgsupervision [other options] --params "'/Token:mytokenvalue /Node:12345'"`
  
 ## Package update
-This installer deploys the version 2.4.108.0 of RG System Suite by Septeo© Supervision agent (for Windows operating systems). 
+This installer deploys the supervision agent v.2.4.108.0 (by RG System Suite by Septeo©) for Windows operating systems. 
 Following updates will be automatically handled by agent self update feature. Hence, no Chocolatey update action is required.
 
 ## Current version
 Binary included in the current package corresponds to version 2.4.108.0.  
-If a newer version has been released since, it will be automatically updated a few moments after installation.  
+If a newer version has been released since, it will be automatically self-updated a few moments after installation.  
