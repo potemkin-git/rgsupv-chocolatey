@@ -2,7 +2,7 @@
 Verification is intended to assist the Chocolatey moderators and community
 in verifying that this package's contents are trustworthy.
 
-This package is owned, published and maintained by RG System Suite by Septeo© (a product of Septeo IT Solutions©).
+This package is owned, published and maintained by RG System Suite (a product of Septeo IT Solutions).
 More info can be found within the company website at https://www.rgsystem.fr
 Binary download can be reached through this page: https://www.rgsystem.fr/telecharger-agent, while choosing and extracting the .zip option.
 Note: online version corresponds to the latest release which may vary through time, while this package provides the 2.4.108.0 version.
